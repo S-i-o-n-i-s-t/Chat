@@ -6,10 +6,13 @@ package server;
 // 5 При запуске клиента чата заполнять поле истории из файла, если он существует.
 // Обратите внимание, что чаще всего история сообщений хранится на сервере и заполнение истории чата лучше делать при соединении с сервером, а не при открытии окна клиента.
 
+import server.classSserver.ServerWindow;
+import server.client.ClientGUI;
+
 public class Start {
     public static void main(String[] args) {
         ServerWindow serverWindow = new ServerWindow();
-        new  ClientGUI(serverWindow);
+        new ClientGUI(serverWindow);
         new  ClientGUI(serverWindow);
     }
 }

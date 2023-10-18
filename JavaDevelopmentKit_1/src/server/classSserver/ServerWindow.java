@@ -1,4 +1,6 @@
-package server;
+package server.classSserver;
+
+import server.client.ClientGUI;
 
 import javax.swing.*;
 import java.awt.*;
@@ -157,7 +159,7 @@ public class ServerWindow extends JFrame {
         add(jPanelButton, BorderLayout.SOUTH);
         add(jScrollPane, BorderLayout.NORTH);
     }
-    ServerWindow(){
+    public ServerWindow(){
         clientGUIList = new ArrayList<>();
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(WIDTH, HEIGHT);

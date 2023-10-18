@@ -1,4 +1,6 @@
-package server;
+package server.client;
+
+import server.classSserver.ServerWindow;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,11 +12,14 @@ public class ClientGUI extends JFrame {
     private final  int HEIGHT = 350;
     private final int LOC_WIDTH = 750;
     private final int LOC_HEIGHT = 400;
-
+    JButton login, send;
+    JTextField port, ip, log, message;
+    JPasswordField password;
+    JPanel panelRegistr1, panelRegistr2, panelGroupRegistr, panelMessage;
+    JTextArea hustoryMessage;
     private String textMassage;
     private String name;
     private boolean connectClientGUI;
-
     public void startClientGUI() {
         this.connectClientGUI = true;
         panelGroupRegistr.setVisible(false);
@@ -41,16 +46,10 @@ public class ClientGUI extends JFrame {
     public void setTextMassage(String textMassage) {
         this.textMassage = textMassage;
     }
-
-    JButton login, send;
-    JTextField port, ip, log, message;
-    JPasswordField password;
-    JPanel panelRegistr1, panelRegistr2, panelGroupRegistr, panelMessage;
-    JTextArea hustoryMessage;
     public void setHustoryMessage(String textMassage){
         hustoryMessage.setText(textMassage);
     }
-    ClientGUI(ServerWindow serverWindow){
+    public ClientGUI(ServerWindow serverWindow){
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(WIDTH, HEIGHT);
         setLocation(LOC_WIDTH, LOC_HEIGHT);
