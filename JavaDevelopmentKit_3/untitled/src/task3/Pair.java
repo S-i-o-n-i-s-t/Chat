@@ -4,8 +4,8 @@ package task3;
     // а также переопределение метода toString(), возвращающее строковое представление пары.
 
 public class Pair <T, V>{
-    private T type1;
-    private V type2;
+    private final T type1;
+    private final V type2;
 
     public Pair(T type1, V type2) {
         this.type1 = type1;
