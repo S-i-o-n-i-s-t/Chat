@@ -14,7 +14,6 @@ public class Employee {
     private String name;
     // Стаж
     private int experience;
-    private List<Employee> listSort;
     private List<Integer> listPhoneNumber;
     private final String[] COLLECTION_NAME = {"Василий", "Петр", "Елена", "Ольга", "Вятчеслав", "Томара", "Максим", "Иван", "Надежда", "Владимир"};
     Random random = new Random();
@@ -39,11 +38,6 @@ public class Employee {
     public List<Employee> getListEmployee() {
         return listEmployee;
     }
-
-    public List<Employee> getListSort() {
-        return listSort;
-    }
-
     public List<Integer> getListPhoneNumber() {
         return listPhoneNumber;
     }
@@ -77,13 +71,14 @@ public class Employee {
         }
     }
     // Добавить метод, который ищет сотрудника по стажу (может быть список)
-    public void searchExperience(int search){
-        listSort = new ArrayList<>();
+    public List<Employee> searchExperience(int search){
+        List<Employee> listSort = new ArrayList<>();
         for (Employee item: listEmployee) {
             if (item.getExperience() == search){
                 listSort.add(item);
             }
         }
+        return listSort;
     }
     // Добавить метод, который выводит номер телефона сотрудника по имени (может быть список)
     public void searchPchoneNumber(String name){
@@ -120,5 +115,4 @@ public class Employee {
                 ", startDate = " + experience +
                 '}';
     }
-
 }

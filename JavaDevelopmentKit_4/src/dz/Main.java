@@ -22,8 +22,8 @@ public class Main
 //        }
         System.out.println("_________________________");
         // Добавить метод, который ищет сотрудника по стажу (может быть список)
-        employee.searchExperience(3);
-            for (Employee item: employee.getListSort()) {
+        // employee.searchExperience(3);
+            for (Employee item: employee.searchExperience(3)) {
                 System.out.println(item);
             }
         System.out.println("_________________________");
