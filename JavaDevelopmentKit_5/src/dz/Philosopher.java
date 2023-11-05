@@ -1,41 +1,56 @@
 package dz;
 
+import java.util.concurrent.CountDownLatch;
+
 public class Philosopher extends Thread{
-    private final String name;
+    private final String NAME;
     private int portion;
     private boolean pause;
-    public Fork right, left;
+    private CountDownLatch cdl;
+    public Fork rightFork, leftFork;
     private final int satiety = 3;
-    public Philosopher(String name) {
-        this.name = name;
+    public Philosopher(String name, CountDownLatch cdl) {
+        this.NAME = name;
+        this.cdl = cdl;
+    }
+    public void distributionOfActions(){
+        rightFork.setPriority();
+        leftFork.setPriority();
+        if (!rightFork.isCondition() && !leftFork.isCondition() && !pause){
+            thinking();
+        }else {
+            eating();
+        }
     }
     public void thinking(){
-        right.setCondition(true);
-        left.setCondition(true);
-        System.out.println(name + " - ест");
+        rightFork.setCondition(true);
+        leftFork.setCondition(true);
+        System.out.println(NAME + " - ест");
         portion++;
         pause = true;
+        if (this.portion == satiety){
+            cdl.countDown();
+        }
     }
     public void eating(){
-        right.setCondition(false);
-        left.setCondition(false);
+        rightFork.setCondition(false);
+        leftFork.setCondition(false);
         pause = false;
-        System.out.println(name + " - размышляет");
+        System.out.println(NAME + " - размышляет");
     }
-
     @Override
     public String toString() {
-        return name;
+        return NAME;
     }
     @Override
     public void run() {
-        while (this.portion != satiety){
-            if (!right.isCondition() && !left.isCondition() && !this.pause){
-                thinking();
+        while (cdl.getCount() != 0){
+            if (this.portion != satiety){
+                distributionOfActions();
+            }else {
+                eating();
             }
-            else {eating();}
-            try {
-                sleep(1500);
+            try { sleep(5000);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
