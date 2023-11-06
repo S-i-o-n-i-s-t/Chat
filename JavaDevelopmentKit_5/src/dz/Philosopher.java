@@ -14,8 +14,6 @@ public class Philosopher extends Thread{
         this.cdl = cdl;
     }
     public void distributionOfActions(){
-        rightFork.setPriority();
-        leftFork.setPriority();
         if (!rightFork.isCondition() && !leftFork.isCondition() && !pause){
             thinking();
         }else {

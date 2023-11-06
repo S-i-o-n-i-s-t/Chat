@@ -35,7 +35,14 @@ public class RoundTable extends Thread{
     public void generateTable(){
         for (int i = 0; i < NUMBER_PERSONS; i++){
             addPhilosopher(names[i]);
+            if (i % 2 == 0){
+                philosopherHead.setPriority(MIN_PRIORITY);
+            }
+            else {
+                philosopherHead.setPriority(MAX_PRIORITY);
+            }
         }
+        start.setPriority(NORM_PRIORITY);
         round();
     }
     public void round(){
