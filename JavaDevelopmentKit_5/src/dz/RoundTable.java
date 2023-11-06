@@ -3,11 +3,11 @@ package dz;
 import java.util.concurrent.CountDownLatch;
 
 public class RoundTable extends Thread{
-    private final String[] names = {"1 Философ Василий","2 Философ Игорь","3 Философ Павел","4 Философ Максим","5 Философ Анатолий"};
+    private final String[] NAMES = {"1 Философ Василий","2 Философ Игорь","3 Философ Павел","4 Философ Максим","5 Философ Анатолий"};
     private final int NUMBER_PERSONS = 5;
     private final CountDownLatch CDL = new CountDownLatch(NUMBER_PERSONS);
     private Philosopher philosopherHead;
-    private Philosopher start;
+    private Philosopher philosopherTail;
     private Fork forkHead;
     public RoundTable() {
     }
@@ -29,12 +29,12 @@ public class RoundTable extends Thread{
             forkHead = new Fork();
             philosopherHead.rightFork = forkHead;
             forkHead.leftConnect = philosopherHead;
-            start = philosopherHead;
+            philosopherTail = philosopherHead;
         }
     }
     public void generateTable(){
         for (int i = 0; i < NUMBER_PERSONS; i++){
-            addPhilosopher(names[i]);
+            addPhilosopher(NAMES[i]);
             if (i % 2 == 0){
                 philosopherHead.setPriority(MIN_PRIORITY);
             }
@@ -42,12 +42,12 @@ public class RoundTable extends Thread{
                 philosopherHead.setPriority(MAX_PRIORITY);
             }
         }
-        start.setPriority(NORM_PRIORITY);
+        philosopherTail.setPriority(NORM_PRIORITY);
         round();
     }
     public void round(){
-        forkHead.rightConnect = start;
-        start.leftFork = forkHead;
+        forkHead.rightConnect = philosopherTail;
+        philosopherTail.leftFork = forkHead;
     }
     public synchronized void goReuod(){
         for (int i = 0; i < NUMBER_PERSONS; i++){
