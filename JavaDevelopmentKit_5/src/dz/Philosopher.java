@@ -13,14 +13,14 @@ public class Philosopher extends Thread{
         this.NAME = name;
         this.cdl = cdl;
     }
-    public void distributionOfActions(){
+    public synchronized void distributionOfActions(){
         if (!rightFork.isCondition() && !leftFork.isCondition() && !pause){
-            thinking();
-        }else {
             eating();
+        }else {
+            thinking();
         }
     }
-    public void thinking(){
+    public void eating(){
         rightFork.setCondition(true);
         leftFork.setCondition(true);
         System.out.println(NAME + " - ест");
@@ -30,7 +30,7 @@ public class Philosopher extends Thread{
             cdl.countDown();
         }
     }
-    public void eating(){
+    public void thinking(){
         rightFork.setCondition(false);
         leftFork.setCondition(false);
         pause = false;
@@ -46,7 +46,7 @@ public class Philosopher extends Thread{
             if (this.portion != satiety){
                 distributionOfActions();
             }else {
-                eating();
+                thinking();
             }
             try { sleep(5000);
             } catch (InterruptedException e) {
@@ -55,3 +55,4 @@ public class Philosopher extends Thread{
         }
     }
 }
+
